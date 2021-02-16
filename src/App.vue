@@ -57,16 +57,15 @@
         },
         methods: {
             next(){
+
                 this.index+=1
                 if(this.index > this.allsongs.length - 1) {
                     this.currentTime = 0
                     this.index = 0
                 }
-                setTimeout(() => {
-                    this.currentTime = 0
-                    this.currentSong = this.allsongs[this.index]
-                    this.play(this.currentSong)
-                }, 1000);
+                this.currentTime = 0
+                this.currentSong = this.allsongs[this.index]
+                this.play(this.currentSong)
             }, 
             shuffle(){
 
