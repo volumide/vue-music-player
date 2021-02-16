@@ -1,6 +1,7 @@
 <template>
 <div>
     <!-- <audio :src="currentSong.src"  ref="player" autoplay></audio> -->
+    <p class="logo">Mosic Player</p>
     <div class="sounds">
         <div v-for="(song, index) in allsongs" :key="index" class="artist">
              <small>
@@ -29,7 +30,6 @@
 </template>
 
 <script>
-
     export default {
         name: 'App',
         data() {
@@ -64,8 +64,10 @@
                     console.log('end of song list')
                     return
                 }
-                this.currentSong = this.allsongs[this.index]
-                this.play(this.currentSong)
+                setTimeout(() => {
+                    this.currentSong = this.allsongs[this.index]
+                    this.play(this.currentSong)
+                }, 1000);
             }, 
             shuffle(){
 
@@ -139,6 +141,13 @@
     .fa-music{
         color: rgb(230, 161, 12);
     }
+    .logo{
+        padding : 20px;
+        font-weight: bold;
+        font-size: 1.5rem;
+        text-align: center;
+        font-family: 'Montez', cursive;
+    }
     .controls{
         padding: 20px;
         position: fixed;
@@ -177,7 +186,6 @@
         border-radius: 10px;
         border: 1px solid transparent;
         box-shadow: 0 0 10px rgba(255, 215, 0, .5)
-
     }
     .sounds .artist{
         padding: 10px;
