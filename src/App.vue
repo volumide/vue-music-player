@@ -58,13 +58,11 @@
 
         methods: {
             next(){
+                this.currentTime = 0
                 this.index++
                 if(this.index > this.allsongs.length - 1) {
-                    this.player.pause()
-                    this.currentTime = 0
-                    this.player.src = ""
+                    this.index = 0
                 }
-                this.currentTime = 0
                 this.currentSong = this.allsongs[this.index]
                 this.play(this.currentSong)
             }, 
@@ -87,7 +85,7 @@
                     this.artist = this.currentSong.artist
                     this.title = this.currentSong.title
                 }
-                this.player.load()
+                
                 this.player.currentTime = this.currentTime
                 this.player.play()
 
@@ -117,15 +115,19 @@
                     this.currentTime = 0
                 }
                 this.play(this.currentSong.src)
+            },
+
+            load(){
+                this.index = 0
+                this.currentSong = this.allsongs[this.index]
+                this.player.src = this.currentSong.src
+                this.player.load()
+                this.artist = this.currentSong.artist
+                this.title =  this.currentSong.title
             }
         },
         created() {
-            this.currentSong = this.allsongs[this.index]
-            this.player.src = this.currentSong.src
-            this.artist = this.currentSong.artist
-            this.title =  this.currentSong.title
-            
-            // this.player.play()
+            this.load()
         },
     }
 </script>
