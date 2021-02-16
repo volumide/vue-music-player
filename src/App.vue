@@ -55,21 +55,19 @@
                 player: new Audio()
             }
         },
+
         methods: {
             next(){
-
-                this.index+=1
+                this.index++
                 if(this.index > this.allsongs.length - 1) {
+                    this.player.pause()
                     this.currentTime = 0
-                    this.index = 0
+                    this.player.src = ""
                 }
                 this.currentTime = 0
                 this.currentSong = this.allsongs[this.index]
                 this.play(this.currentSong)
             }, 
-            shuffle(){
-
-            },
 
             prev(){
                 this.index--
@@ -82,23 +80,26 @@
                 this.play(this.currentSong)
             },
 
-            async play(song){
+            play(song){
                 if (typeof song.src !== "undefined") {
                     this.currentSong = song
                     this.player.src = this.currentSong.src
                     this.artist = this.currentSong.artist
                     this.title = this.currentSong.title
                 }
+                this.player.load()
                 this.player.currentTime = this.currentTime
-                await this.player.play()
+                this.player.play()
+
+                // await this.player.play()
                 setInterval(() => {
                     this.currentTime = this.player.currentTime
                 }, 1000);
-
                 this.player.addEventListener('ended',function(){
                     this.next()
-                    return
                 }.bind(this))
+
+
                 // console.log(this.index)
 
             
